@@ -588,19 +588,24 @@
   }
   .portal-actions {
     display: flex; flex-direction: column; gap: 0.7rem;
+    align-items: stretch;
   }
   .portal-btn {
-    padding: 0.9rem 1.4rem;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 1.4rem;
     border-radius: 10px;
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.25s ease;
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-    border: 0;
+    border: 1px solid transparent;
     font-family: inherit;
     text-decoration: none;
-    width: 100%;
+    line-height: 1;
+    text-align: center;
   }
   .portal-btn-primary {
     background: #5b9ddb;
@@ -611,24 +616,26 @@
     background: #7ab0e0;
     transform: translateY(-1px);
     box-shadow: 0 12px 24px rgba(91, 157, 219, 0.4);
+    color: #0f2540;
   }
-  .portal-btn-primary svg { width: 16px; height: 16px; transition: transform 0.25s ease; }
+  .portal-btn-primary svg { width: 16px; height: 16px; transition: transform 0.25s ease; flex-shrink: 0; }
   .portal-btn-primary:hover svg { transform: translateX(3px); }
   .portal-btn-disabled {
     background: rgba(255,255,255,0.05);
     color: rgba(255,255,255,0.4);
     cursor: not-allowed;
-    border: 1px solid rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.08);
   }
   .portal-btn-disabled:hover { transform: none; background: rgba(255,255,255,0.05); }
   .portal-btn-disabled .badge-soon {
     font-size: 0.7rem;
     background: rgba(201, 168, 106, 0.18);
     color: #c9a86a;
-    padding: 2px 8px;
+    padding: 4px 10px;
     border-radius: 999px;
     font-weight: 500;
     letter-spacing: 0.05em;
+    line-height: 1;
   }
   .portal-footer {
     margin-top: 1.5rem;
