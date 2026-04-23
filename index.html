@@ -519,6 +519,133 @@
   }
   .hp-field input { width: 1px; height: 1px; }
 
+  /* Kunden-Portal Modal */
+  .portal-btn-nav {
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    border-color: var(--blue-700);
+    color: var(--blue-700);
+  }
+  .portal-btn-nav:hover { background: var(--blue-700); color: white; }
+  .portal-overlay {
+    position: fixed; inset: 0; z-index: 130;
+    background: rgba(15, 37, 64, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .portal-overlay.open { display: flex; }
+  .portal-overlay.visible { opacity: 1; }
+  .portal-modal {
+    background: #1a2332;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    color: #e8eef6;
+    position: relative;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .portal-overlay.visible .portal-modal { transform: none; }
+  .portal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7);
+    border: 0; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .portal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .portal-close svg { width: 18px; height: 18px; }
+  .portal-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2c5e93 0%, #5b9ddb 100%);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 8px 24px rgba(91, 157, 219, 0.25);
+  }
+  .portal-icon svg { width: 28px; height: 28px; color: #fff; }
+  .portal-modal h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+  .portal-modal p {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .portal-actions {
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .portal-btn {
+    padding: 0.9rem 1.4rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    border: 0;
+    font-family: inherit;
+    text-decoration: none;
+    width: 100%;
+  }
+  .portal-btn-primary {
+    background: #5b9ddb;
+    color: #0f2540;
+    box-shadow: 0 8px 20px rgba(91, 157, 219, 0.3);
+  }
+  .portal-btn-primary:hover {
+    background: #7ab0e0;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(91, 157, 219, 0.4);
+  }
+  .portal-btn-primary svg { width: 16px; height: 16px; transition: transform 0.25s ease; }
+  .portal-btn-primary:hover svg { transform: translateX(3px); }
+  .portal-btn-disabled {
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.4);
+    cursor: not-allowed;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .portal-btn-disabled:hover { transform: none; background: rgba(255,255,255,0.05); }
+  .portal-btn-disabled .badge-soon {
+    font-size: 0.7rem;
+    background: rgba(201, 168, 106, 0.18);
+    color: #c9a86a;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .portal-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.3rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+  }
+  .portal-footer a { color: #5b9ddb; text-decoration: none; }
+  .portal-footer a:hover { text-decoration: underline; }
+  @media (max-width: 720px) {
+    .portal-modal { padding: 1.8rem; }
+    .portal-modal h3 { font-size: 1.4rem; }
+    .portal-btn-nav { padding: 0.5rem 0.8rem; font-size: 0.82rem; }
+  }
+
   .mobile-toggle {
     display: none; width: 42px; height: 42px;
     align-items: center; justify-content: center;
@@ -1386,6 +1513,7 @@
             <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           </button>
         </li>
+        <li><button type="button" id="portalBtn" class="btn btn-ghost portal-btn-nav">Kunden-Portal</button></li>
         <li><a href="#auftrag" data-page="auftrag" class="btn btn-brand">Auftrag erteilen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
       </ul>
     </nav>
@@ -2224,6 +2352,32 @@
   </section>
 </main>
 
+<!-- Kunden-Portal Modal -->
+<div class="portal-overlay" id="portalOverlay" role="dialog" aria-modal="true" aria-labelledby="portalTitle">
+  <div class="portal-modal">
+    <button class="portal-close" id="portalClose" type="button" aria-label="Schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="portal-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <h3 id="portalTitle">Unser neues Portal kommt!</h3>
+    <p>Wir modernisieren unsere Systeme für Sie. Bestehende Kunden loggen sich bald hier ein. Neue Kunden können sich bereits jetzt registrieren.</p>
+    <div class="portal-actions">
+      <button type="button" class="portal-btn portal-btn-disabled" disabled>
+        Login <span class="badge-soon">Demnächst</span>
+      </button>
+      <a href="#auftrag" data-page="auftrag" class="portal-btn portal-btn-primary" id="portalRegister">
+        Jetzt registrieren &amp; Auftrag erteilen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="portal-footer">
+      Fragen? <a href="mailto:office@inkasso-blum.at">office@inkasso-blum.at</a> · <a href="tel:+432742367379">+43 2742 367 379</a>
+    </div>
+  </div>
+</div>
+
 <!-- Floating Action Buttons -->
 <div class="fab-stack">
   <button class="chat-fab" id="chatFab" aria-label="AI Assistent öffnen" type="button">
@@ -2384,6 +2538,39 @@
   }
   if (waInput) waInput.addEventListener('input', updateWA);
   updateWA();
+
+  // Kunden-Portal modal
+  const portalBtn = document.getElementById('portalBtn');
+  const portalOverlay = document.getElementById('portalOverlay');
+  const portalClose = document.getElementById('portalClose');
+  const portalRegister = document.getElementById('portalRegister');
+  function openPortal() {
+    portalOverlay.classList.add('open');
+    requestAnimationFrame(() => portalOverlay.classList.add('visible'));
+    document.body.style.overflow = 'hidden';
+  }
+  function closePortal() {
+    portalOverlay.classList.remove('visible');
+    setTimeout(() => {
+      portalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }, 300);
+  }
+  if (portalBtn) portalBtn.addEventListener('click', openPortal);
+  if (portalClose) portalClose.addEventListener('click', closePortal);
+  if (portalOverlay) portalOverlay.addEventListener('click', (e) => {
+    if (e.target === portalOverlay) closePortal();
+  });
+  if (portalRegister) portalRegister.addEventListener('click', (e) => {
+    e.preventDefault();
+    closePortal();
+    setTimeout(() => navigate('auftrag'), 250);
+    const mn = document.getElementById('mainnav');
+    if (mn) mn.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && portalOverlay && portalOverlay.classList.contains('open')) closePortal();
+  });
 
   // ---- AI Chatbot ----
   const FAQ_KB = [
